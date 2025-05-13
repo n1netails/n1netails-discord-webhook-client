@@ -11,6 +11,12 @@
   <description>A lightweight Java client for sending Discord webhooks.</description>
   <url>https://github.com/n1netails/n1netails-discord-webhook-client</url>
 
+  <scm>
+    <url>https://github.com/n1netails/n1netails-discord-webhook-client</url>
+    <connection>scm:git:git://github.com/n1netails/n1netails-discord-webhook-client.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:n1netails/n1netails-discord-webhook-client.git</developerConnection>
+  </scm>
+
   <licenses>
     <license>
       <name>GNU Affero General Public License v3.0</name>
@@ -23,6 +29,7 @@
       </comments>
     </license>
   </licenses>
+
   <developers>
     <developer>
       <id>shahidfoy</id>
