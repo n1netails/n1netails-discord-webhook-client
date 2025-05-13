@@ -9,7 +9,7 @@
 
   <name>n1netails-discord-webhook-client</name>
   <description>A lightweight Java client for sending Discord webhooks.</description>
-  <url>https://github.com/yourusername/n1netails-discord-webhook-client</url>
+  <url>https://github.com/n1netails/n1netails-discord-webhook-client</url>
 
   <licenses>
     <license>
