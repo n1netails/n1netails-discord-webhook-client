@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.n1ne</groupId>
+  <artifactId>n1netails-discord-webhook-client</artifactId>
+  <version>0.1.0</version>
+  <packaging>jar</packaging>
+
+  <name>n1netails-discord-webhook-client</name>
+  <description>A lightweight Java client for sending Discord webhooks.</description>
+  <url>https://github.com/yourusername/n1netails-discord-webhook-client</url>
+
+  <licenses>
+    <license>
+      <name>GNU Affero General Public License v3.0</name>
+      <url>https://www.gnu.org/licenses/agpl-3.0.html</url>
+      <distribution>repo</distribution>
+      <comments>
+        This project is available under a dual license:
+        1. AGPLv3 for open source use
+        2. Commercial license for enterprises — contact support@yourdomain.com
+      </comments>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>shahidfoy</id>
+      <name>Shahid Foy</name>
+      <email>shahidfoy@gmail.com</email>
+    </developer>
+  </developers>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.18.3</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
