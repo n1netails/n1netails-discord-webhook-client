@@ -37,9 +37,9 @@ Here is how you can configure the project for different frameworks
 Add the following beans to your spring boot application:
 
 ```java
-import api.discord.n1netails.com.n1ne.n1netails.discord.DiscordWebhookClient;
-import internal.discord.n1netails.com.n1ne.n1netails.discord.DiscordWebhookClientImpl;
-import service.discord.n1netails.com.n1ne.n1netails.discord.WebhookService;
+import com.n1netails.n1netails.discord.api.DiscordWebhookClient;
+import com.n1netails.n1netails.discord.internal.DiscordWebhookClientImpl;
+import com.n1netails.n1netails.discord.service.WebhookService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -61,8 +61,8 @@ public class DiscordWebhookConfig {
 ### Java
 
 ```java
-import internal.discord.n1netails.com.n1ne.n1netails.discord.DiscordWebhookClientImpl;
-import service.discord.n1netails.com.n1ne.n1netails.discord.WebhookService;
+import com.n1netails.n1netails.discord.internal.DiscordWebhookClientImpl;
+import com.n1netails.n1netails.discord.service.WebhookService;
 
 WebhookService service = new WebhookService();
 DiscordWebhookClient client = new DiscordWebhookClientImpl(service);
@@ -70,10 +70,9 @@ DiscordWebhookClient client = new DiscordWebhookClientImpl(service);
 
 ## Use
 ```java
-import api.discord.n1netails.com.n1ne.n1netails.discord.DiscordWebhookClient;
-import com.n1ne.n1netails.discord.dto.WebhookMessage;
-import internal.discord.n1netails.com.n1ne.n1netails.discord.DiscordWebhookClientImpl;
-import service.discord.n1netails.com.n1ne.n1netails.discord.WebhookService;
+import com.n1netails.n1netails.discord.api.DiscordWebhookClient;
+import com.n1netails.n1netails.discord.internal.DiscordWebhookClientImpl;
+import com.n1netails.n1netails.discord.service.WebhookService;
 
 public class ExampleService {
     private final DiscordWebhookClient webhookClient;
@@ -105,10 +104,9 @@ Example:
 
 ```java
 import com.n1netails.n1netails.discord.DiscordColor;
-import api.discord.n1netails.com.n1ne.n1netails.discord.DiscordWebhookClient;
-import com.n1ne.n1netails.discord.dto.WebhookMessage;
-import internal.discord.n1netails.com.n1ne.n1netails.discord.DiscordWebhookClientImpl;
-import service.discord.n1netails.com.n1ne.n1netails.discord.WebhookService;
+import com.n1netails.n1netails.discord.api.DiscordWebhookClient;
+import com.n1netails.n1netails.discord.model.Embed;
+import com.n1netails.n1netails.discord.model.WebhookMessage;
 
 public class ExampleService {
   private final DiscordWebhookClient webhookClient;
