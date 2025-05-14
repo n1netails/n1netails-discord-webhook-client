@@ -153,7 +153,7 @@ mvn clean install -P release
 
 Maven deploy to the maven central repository
 ```bash
-mvn deploy
+mvn deploy -P release
 ```
 
 ## Support
