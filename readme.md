@@ -24,7 +24,7 @@ https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
 Install the discord webhook client by adding the following dependency:
 ```xml
 <dependency>
-    <groupId>com.n1ne</groupId>
+    <groupId>com.n1netails</groupId>
     <artifactId>n1netails-discord-webhook-client</artifactId>
     <version>0.1.0</version>
 </dependency>
