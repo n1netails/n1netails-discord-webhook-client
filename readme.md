@@ -1,4 +1,4 @@
-# N1ne Tails
+# N1netails
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png" alt="N1ne Tails" width="500" style="display: block; margin: auto;"/>
@@ -6,9 +6,15 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![Stars](https://img.shields.io/github/stars/n1netails/n1netails-discord-webhook-client)
+![Issues](https://img.shields.io/github/issues/n1netails/n1netails-discord-webhook-client)
+![Contributors](https://img.shields.io/github/contributors/n1netails/n1netails-discord-webhook-client)
+![Last Commit](https://img.shields.io/github/last-commit/n1netails/n1netails-discord-webhook-client)
+
+
 # Discord Webhook Client
-N1ne Tails is an open-source project that provides practical alerts and monitoring for applications. 
-Use the N1ne Tails Discord Webhook Client to easily send webhook messages to a discord server.
+N1netails is an open-source project that provides practical alerts and monitoring for applications. 
+Use the N1netails Discord Webhook Client to easily send webhook messages to a discord server.
 
 ## How to set up a discord server
 Use the following documents to create a discord server and discord webhooks. N1ne Tails Discord Webhook Client will 
@@ -26,8 +32,13 @@ Install the discord webhook client by adding the following dependency:
 <dependency>
     <groupId>com.n1netails</groupId>
     <artifactId>n1netails-discord-webhook-client</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
 </dependency>
+```
+
+Gradle (Groovy)
+```groovy
+implementation 'com.n1netails:n1netails-discord-webhook-client:0.2.0'
 ```
 
 ## Configure
