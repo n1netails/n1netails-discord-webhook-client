@@ -157,7 +157,7 @@ public class ExampleService {
     Embed.Author author = new Embed.Author();
     author.setName("N1ne Tails");
     author.setUrl("https://n1netails.com/");
-    author.setIcon_url("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon.png");
+    author.setIcon_url("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
 
     Embed.EmbedField field = new Embed.EmbedField();
     field.setName("Environment");
@@ -166,13 +166,13 @@ public class ExampleService {
 
     Embed.Footer footer = new Embed.Footer();
     footer.setText("N1ne Tails @ 2024");
-    footer.setIcon_url("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon.png");
+    footer.setIcon_url("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
 
     Embed.Image image = new Embed.Image();
-    image.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_banner.png");
+    image.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
 
     Embed.Thumbnail thumbnail = new Embed.Thumbnail();
-    thumbnail.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon.png");
+    thumbnail.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
 
     Embed embed = new EmbedBuilder()
         .withTitle("Build Notification")
