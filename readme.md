@@ -101,6 +101,11 @@ public class ExampleService {
 }
 ```
 
+#### Example message output
+<div align="center">
+  <img src="discord-message-simple.png" alt="N1netails discord message simple" width="500" style="display: block; margin: auto;"/>
+</div>
+
 ## Customize Webhook Message
 Discord webhook resource:
 https://discord.com/developers/docs/resources/webhook
@@ -199,6 +204,11 @@ public class ExampleService {
   }
 }
 ```
+
+#### Example customized message output
+<div align="center">
+  <img src="discord-message-enhanced.png" alt="N1netails discord message customized" width="500" style="display: block; margin: auto;"/>
+</div>
 
 # Develop
 ## Build
