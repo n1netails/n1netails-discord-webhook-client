@@ -107,9 +107,32 @@ https://discord.com/developers/docs/resources/webhook
 
 Send customized webhooks by utilizing the n1netails Pojo's 
 - `WebhookMessage`
+  - `content`
+  - `username`
+  - `avatar_url`
+  - `tts`
+  - `embeds`
 - `Embed`
-  - `Footer`
-  - List of `EmbedField`
+  - `title`
+  - `description`
+  - `url`
+  - `color`
+  - `author`
+    - `name`
+    - `url`
+    - `icon_url`
+  - `fields`
+    - `name`
+    - `value`
+    - `inline`
+  - `footer`
+    - `text`
+    - `icon_url`
+  - `image`
+    - `url`
+  - `thumbnail`
+    - `url`
+  - `timestamp`
 
 Example:
 
@@ -118,6 +141,10 @@ import com.n1netails.n1netails.discord.DiscordColor;
 import com.n1netails.n1netails.discord.api.DiscordWebhookClient;
 import com.n1netails.n1netails.discord.model.Embed;
 import com.n1netails.n1netails.discord.model.WebhookMessage;
+import com.n1netails.n1netails.discord.model.WebhookMessageBuilder;
+import com.n1netails.n1netails.discord.model.EmbedBuilder;
+import java.util.Collections;
+import java.time.Instant;
 
 public class ExampleService {
   private final DiscordWebhookClient webhookClient;
@@ -127,15 +154,44 @@ public class ExampleService {
   }
 
   public void webhookExample(String content) {
-    Embed embed = new Embed();
-    embed.setTitle("Build Notification");
-    embed.setDescription("The build has succeeded ✅");
-    embed.setColor(DiscordColor.BLUE.getValue());
+    Embed.Author author = new Embed.Author();
+    author.setName("N1ne Tails");
+    author.setUrl("https://n1netails.com/");
+    author.setIcon_url("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon.png");
 
-    WebhookMessage msg = new WebhookMessage();
-    msg.setUsername("CI Bot");
-    msg.setContent("Deployment update");
-    msg.setEmbeds(List.of(embed));
+    Embed.EmbedField field = new Embed.EmbedField();
+    field.setName("Environment");
+    field.setValue("Development");
+    field.setInline(true);
+
+    Embed.Footer footer = new Embed.Footer();
+    footer.setText("N1ne Tails @ 2024");
+    footer.setIcon_url("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon.png");
+
+    Embed.Image image = new Embed.Image();
+    image.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_banner.png");
+
+    Embed.Thumbnail thumbnail = new Embed.Thumbnail();
+    thumbnail.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon.png");
+
+    Embed embed = new EmbedBuilder()
+        .withTitle("Build Notification")
+        .withDescription("The build has succeeded ✅")
+        .withUrl("https://n1netails.com/")
+        .withColor(DiscordColor.BLUE.getValue())
+        .withAuthor(author)
+        .withFields(Collections.singletonList(field))
+        .withFooter(footer)
+        .withImage(image)
+        .withThumbnail(thumbnail)
+        .withTimestamp(Instant.now().toString())
+        .build();
+
+    WebhookMessage msg = new WebhookMessageBuilder()
+        .withUsername("CI Bot")
+        .withContent("Deployment update")
+        .withEmbeds(Collections.singletonList(embed))
+        .build();
 
     // replace with your discord webhook url
     String webhookUrl = "https://discord.com/api/webhooks/xxx/yyy";
