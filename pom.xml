@@ -4,7 +4,7 @@
 
   <groupId>com.n1netails</groupId>
   <artifactId>n1netails-discord-webhook-client</artifactId>
-  <version>0.1.1</version>
+  <version>0.2.0</version>
   <packaging>jar</packaging>
 
   <name>n1netails-discord-webhook-client</name>
@@ -46,13 +46,13 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.19.2</version>
+      <version>2.20.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.40</version>
+      <version>1.18.42</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
