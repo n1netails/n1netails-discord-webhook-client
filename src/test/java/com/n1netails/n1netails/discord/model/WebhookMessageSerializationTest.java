@@ -13,13 +13,9 @@ public class WebhookMessageSerializationTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void testSerializationWithComponentsAndVideo() throws JsonProcessingException {
-        Embed.Video video = new Embed.Video();
-        video.setUrl("http://example.com/video.mp4");
-
+    public void testSerializationWithComponents() throws JsonProcessingException {
         Embed embed = new EmbedBuilder()
                 .withTitle("Test Title")
-                .withVideo(video)
                 .build();
 
         Component button = new ComponentBuilder()
@@ -43,11 +39,25 @@ public class WebhookMessageSerializationTest {
         String json = objectMapper.writeValueAsString(message);
 
         assertTrue(json.contains("\"content\":\"Test Content\""));
-        assertTrue(json.contains("\"video\":{\"url\":\"http://example.com/video.mp4\"}"));
         assertTrue(json.contains("\"components\":[{\"type\":1"));
         assertTrue(json.contains("\"type\":2"));
         assertTrue(json.contains("\"label\":\"Click Me\""));
         assertTrue(json.contains("\"style\":5"));
         assertTrue(json.contains("\"url\":\"http://example.com\""));
+    }
+
+    @Test
+    public void testSerializationWithFiles() throws JsonProcessingException {
+        WebhookFile file = new WebhookFile("test.txt", "hello".getBytes());
+        WebhookMessage message = new WebhookMessageBuilder()
+                .withContent("Test with files")
+                .withFiles(Collections.singletonList(file))
+                .build();
+
+        String json = objectMapper.writeValueAsString(message);
+
+        assertTrue(json.contains("\"content\":\"Test with files\""));
+        // files should be ignored in JSON
+        assertTrue(!json.contains("\"files\""));
     }
 }

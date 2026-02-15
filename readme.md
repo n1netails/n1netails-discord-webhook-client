@@ -137,8 +137,6 @@ Send customized webhooks by utilizing the n1netails Pojo's
     - `url`
   - `thumbnail`
     - `url`
-  - `video`
-    - `url`
   - `timestamp`
 - `Component`
   - `type`
@@ -190,9 +188,6 @@ public class ExampleService {
     Embed.Thumbnail thumbnail = new Embed.Thumbnail();
     thumbnail.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
 
-    Embed.Video video = new Embed.Video();
-    video.setUrl("https://www.w3schools.com/html/mov_bbb.mp4");
-
     Embed embed = new EmbedBuilder()
         .withTitle("Build Notification")
         .withDescription("The build has succeeded ✅")
@@ -203,7 +198,6 @@ public class ExampleService {
         .withFooter(footer)
         .withImage(image)
         .withThumbnail(thumbnail)
-        .withVideo(video)
         .withTimestamp(Instant.now().toString())
         .build();
 
@@ -219,12 +213,19 @@ public class ExampleService {
         .withComponents(Collections.singletonList(button))
         .build();
 
+    // To include a video, simply put the video URL in the content or attach a file
+    String content = "Deployment update\nhttps://www.w3schools.com/html/mov_bbb.mp4";
+
     WebhookMessage msg = new WebhookMessageBuilder()
         .withUsername("CI Bot")
-        .withContent("Deployment update")
+        .withContent(content)
         .withEmbeds(Collections.singletonList(embed))
         .withComponents(Collections.singletonList(actionRow))
         .build();
+
+    // Example of attaching a file (e.g., a video or image)
+    // WebhookFile file = new WebhookFile("video.mp4", videoBytes);
+    // msg.setFiles(Collections.singletonList(file));
 
     // replace with your discord webhook url
     String webhookUrl = "https://discord.com/api/webhooks/xxx/yyy";

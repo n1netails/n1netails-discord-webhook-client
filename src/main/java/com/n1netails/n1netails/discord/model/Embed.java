@@ -22,7 +22,6 @@ public class Embed {
     private Footer footer;
     private Image image;
     private Thumbnail thumbnail;
-    private Video video;
     private String timestamp;
 
     /**
@@ -105,17 +104,4 @@ public class Embed {
         public Thumbnail() {}
     }
 
-    /**
-     * Discord Webhook Video
-     */
-    @Getter
-    @Setter
-    public static class Video {
-        private String url;
-
-        /**
-         * Discord Webhook Video Constructor
-         */
-        public Video() {}
-    }
 }
