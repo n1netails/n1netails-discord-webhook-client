@@ -18,6 +18,7 @@ public class WebhookMessage {
     private String avatar_url;
     private boolean tts;
     private List<Embed> embeds;
+    private List<Component> components;
 
     /**
      * Webhook Message Constructor

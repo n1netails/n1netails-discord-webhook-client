@@ -137,17 +137,28 @@ Send customized webhooks by utilizing the n1netails Pojo's
     - `url`
   - `thumbnail`
     - `url`
+  - `video`
+    - `url`
   - `timestamp`
+- `Component`
+  - `type`
+  - `style`
+  - `label`
+  - `emoji`
+    - `id`
+    - `name`
+    - `animated`
+  - `custom_id`
+  - `url`
+  - `disabled`
+  - `components`
 
 Example:
 
 ```java
 import com.n1netails.n1netails.discord.DiscordColor;
 import com.n1netails.n1netails.discord.api.DiscordWebhookClient;
-import com.n1netails.n1netails.discord.model.Embed;
-import com.n1netails.n1netails.discord.model.WebhookMessage;
-import com.n1netails.n1netails.discord.model.WebhookMessageBuilder;
-import com.n1netails.n1netails.discord.model.EmbedBuilder;
+import com.n1netails.n1netails.discord.model.*;
 import java.util.Collections;
 import java.time.Instant;
 
@@ -179,6 +190,9 @@ public class ExampleService {
     Embed.Thumbnail thumbnail = new Embed.Thumbnail();
     thumbnail.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
 
+    Embed.Video video = new Embed.Video();
+    video.setUrl("https://www.w3schools.com/html/mov_bbb.mp4");
+
     Embed embed = new EmbedBuilder()
         .withTitle("Build Notification")
         .withDescription("The build has succeeded ✅")
@@ -189,13 +203,27 @@ public class ExampleService {
         .withFooter(footer)
         .withImage(image)
         .withThumbnail(thumbnail)
+        .withVideo(video)
         .withTimestamp(Instant.now().toString())
+        .build();
+
+    Component button = new ComponentBuilder()
+        .withType(Component.BUTTON)
+        .withStyle(Component.LINK)
+        .withLabel("View Build")
+        .withUrl("https://n1netails.com/")
+        .build();
+
+    Component actionRow = new ComponentBuilder()
+        .withType(Component.ACTION_ROW)
+        .withComponents(Collections.singletonList(button))
         .build();
 
     WebhookMessage msg = new WebhookMessageBuilder()
         .withUsername("CI Bot")
         .withContent("Deployment update")
         .withEmbeds(Collections.singletonList(embed))
+        .withComponents(Collections.singletonList(actionRow))
         .build();
 
     // replace with your discord webhook url

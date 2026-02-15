@@ -12,6 +12,7 @@ public class EmbedBuilder {
     private Embed.Footer footer;
     private Embed.Image image;
     private Embed.Thumbnail thumbnail;
+    private Embed.Video video;
     private String timestamp;
 
     public EmbedBuilder withTitle(String title) {
@@ -59,6 +60,11 @@ public class EmbedBuilder {
         return this;
     }
 
+    public EmbedBuilder withVideo(Embed.Video video) {
+        this.video = video;
+        return this;
+    }
+
     public EmbedBuilder withTimestamp(String timestamp) {
         this.timestamp = timestamp;
         return this;
@@ -75,6 +81,7 @@ public class EmbedBuilder {
         embed.setFooter(footer);
         embed.setImage(image);
         embed.setThumbnail(thumbnail);
+        embed.setVideo(video);
         embed.setTimestamp(timestamp);
         return embed;
     }
