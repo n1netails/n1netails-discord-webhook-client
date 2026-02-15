@@ -32,13 +32,13 @@ Install the discord webhook client by adding the following dependency:
 <dependency>
     <groupId>com.n1netails</groupId>
     <artifactId>n1netails-discord-webhook-client</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
 Gradle (Groovy)
 ```groovy
-implementation 'com.n1netails:n1netails-discord-webhook-client:0.2.0'
+implementation 'com.n1netails:n1netails-discord-webhook-client:0.3.0'
 ```
 
 ## Configure
