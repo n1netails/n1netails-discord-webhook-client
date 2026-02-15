@@ -213,8 +213,9 @@ public class ExampleService {
         .withComponents(Collections.singletonList(button))
         .build();
 
-    // To include a video, simply put the video URL in the content or attach a file
-    String content = "Deployment update\nhttps://www.w3schools.com/html/mov_bbb.mp4";
+    // To include a GIF or video, simply put the URL in the content or attach a file.
+    // GIFs can also be added via Embed.Image.url
+    String content = "Deployment update\nhttps://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueHByZnd6Ym16YmZ6YmZ6YmZ6YmZ6YmZ6YmZ6YmZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxV3L2I3v0A/giphy.gif";
 
     WebhookMessage msg = new WebhookMessageBuilder()
         .withUsername("CI Bot")
