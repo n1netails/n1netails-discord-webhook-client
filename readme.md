@@ -170,23 +170,21 @@ import java.util.Collections;
 public class ImageGifExample {
     public void sendMedia(DiscordWebhookClient client, String webhookUrl) {
         // Image in Embed
-        Embed.Image image = new Embed.Image();
-        image.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
-
+        String gifUrl = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2czZjNjbWljd3lva3lvem15NjJoZHptbmR0Y2Z2eWRjaXYzMXF6cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xsE65jaPsUKUo/giphy.gif";
+  
+        Embed.Image gif = new Embed.Image();
+        gif.setUrl(gifUrl);
+  
         Embed embed = new EmbedBuilder()
-            .withTitle("Image Example")
-            .withImage(image)
-            .build();
-
-        // GIF via URL in content
-        String gifUrl = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueHByZnd6Ym16YmZ6YmZ6YmZ6YmZ6YmZ6YmZ6YmZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxV3L2I3v0A/giphy.gif";
-
+                .withTitle("GIF Example")
+                .withImage(gif)
+                .build();
+  
         WebhookMessage msg = new WebhookMessageBuilder()
-            .withContent("Check out this GIF!\n" + gifUrl)
-            .withEmbeds(Collections.singletonList(embed))
-            .build();
+                .withEmbeds(Collections.singletonList(embed))
+                .build();
 
-        client.sendMessage(webhookUrl, msg);
+      client.sendMessage(webhookUrl, msg);
     }
 }
 ```
@@ -200,19 +198,37 @@ import java.util.Collections;
 
 public class VideoExample {
     public void sendVideo(DiscordWebhookClient client, String webhookUrl, byte[] videoData) {
-        // Option 1: Video via URL in content
-        String videoUrl = "https://www.w3schools.com/html/mov_bbb.mp4";
-
-        // Option 2: Video as file attachment
-        WebhookFile file = new WebhookFile("demo.mp4", videoData);
-
+        // Video via URL in content
+        String videoUrl = "https://n1netails.nyc3.cdn.digitaloceanspaces.com/video_2026-02-11_18-16-07.mp4";
+        videoData = downloadToBytes(videoUrl);
+  
+        // Video as file attachment
+        WebhookFile file = new WebhookFile("video_2026-02-11_18-16-07.mp4", videoData);
+  
         WebhookMessage msg = new WebhookMessageBuilder()
-            .withContent("New video uploaded!\n" + videoUrl)
-            .withFiles(Collections.singletonList(file))
-            .build();
-
+                .withContent("New video uploaded!")
+                .withFiles(Collections.singletonList(file))
+                .build();
+  
         client.sendMessage(webhookUrl, msg);
     }
+}
+
+public static byte[] downloadToBytes(String fileUrl) throws IOException {
+  URL url = new URL(fileUrl);
+
+  try (InputStream in = url.openStream();
+       ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+
+    byte[] chunk = new byte[8192];
+    int bytesRead;
+
+    while ((bytesRead = in.read(chunk)) != -1) {
+      buffer.write(chunk, 0, bytesRead);
+    }
+
+    return buffer.toByteArray();
+  }
 }
 ```
 
