@@ -1,5 +1,6 @@
 package com.n1netails.n1netails.discord.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,9 @@ public class WebhookMessage {
     private String avatar_url;
     private boolean tts;
     private List<Embed> embeds;
+    private List<Component> components;
+    @JsonIgnore
+    private List<WebhookFile> files;
 
     /**
      * Webhook Message Constructor

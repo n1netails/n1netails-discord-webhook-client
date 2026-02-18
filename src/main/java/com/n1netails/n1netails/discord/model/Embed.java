@@ -103,4 +103,5 @@ public class Embed {
          */
         public Thumbnail() {}
     }
+
 }

@@ -32,13 +32,13 @@ Install the discord webhook client by adding the following dependency:
 <dependency>
     <groupId>com.n1netails</groupId>
     <artifactId>n1netails-discord-webhook-client</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
 Gradle (Groovy)
 ```groovy
-implementation 'com.n1netails:n1netails-discord-webhook-client:0.2.0'
+implementation 'com.n1netails:n1netails-discord-webhook-client:0.3.0'
 ```
 
 ## Configure
@@ -80,10 +80,15 @@ DiscordWebhookClient client = new DiscordWebhookClientImpl(service);
 ```
 
 ## Use
+Discord webhook resource:
+https://discord.com/developers/docs/resources/webhook
+
+### Simple Example
 ```java
 import com.n1netails.n1netails.discord.api.DiscordWebhookClient;
 import com.n1netails.n1netails.discord.internal.DiscordWebhookClientImpl;
 import com.n1netails.n1netails.discord.service.WebhookService;
+import com.n1netails.n1netails.discord.model.WebhookMessage;
 
 public class ExampleService {
     private final DiscordWebhookClient webhookClient;
@@ -106,10 +111,128 @@ public class ExampleService {
   <img src="discord-message-simple.png" alt="N1netails discord message simple" width="500" style="display: block; margin: auto;"/>
 </div>
 
-## Customize Webhook Message
-Discord webhook resource:
-https://discord.com/developers/docs/resources/webhook
+### Detailed Example
+Includes embeds, fields, and action buttons.
 
+```java
+import com.n1netails.n1netails.discord.DiscordColor;
+import com.n1netails.n1netails.discord.api.DiscordWebhookClient;
+import com.n1netails.n1netails.discord.model.*;
+import java.util.Collections;
+import java.time.Instant;
+
+public class DetailedExample {
+    public void sendDetailedMessage(DiscordWebhookClient client, String webhookUrl) {
+        Embed.EmbedField field = new Embed.EmbedField();
+        field.setName("Environment");
+        field.setValue("Production");
+        field.setInline(true);
+
+        Embed embed = new EmbedBuilder()
+            .withTitle("System Update")
+            .withDescription("All systems are operational 🚀")
+            .withColor(DiscordColor.GREEN.getValue())
+            .withFields(Collections.singletonList(field))
+            .withTimestamp(Instant.now().toString())
+            .build();
+
+        Component button = new ComponentBuilder()
+            .withType(Component.BUTTON)
+            .withStyle(Component.LINK)
+            .withLabel("View Dashboard")
+            .withUrl("https://n1netails.com/")
+            .build();
+
+        Component actionRow = new ComponentBuilder()
+            .withType(Component.ACTION_ROW)
+            .withComponents(Collections.singletonList(button))
+            .build();
+
+        WebhookMessage msg = new WebhookMessageBuilder()
+            .withUsername("Monitor Bot")
+            .withContent("Weekly report is ready!")
+            .withEmbeds(Collections.singletonList(embed))
+            .withComponents(Collections.singletonList(actionRow))
+            .build();
+
+        client.sendMessage(webhookUrl, msg);
+    }
+}
+```
+
+### Image and GIF Example
+You can add images or GIFs via URL in the embed or as a message attachment.
+
+```java
+import com.n1netails.n1netails.discord.model.*;
+import java.util.Collections;
+
+public class ImageGifExample {
+    public void sendMedia(DiscordWebhookClient client, String webhookUrl) {
+        // Image in Embed
+        String gifUrl = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2czZjNjbWljd3lva3lvem15NjJoZHptbmR0Y2Z2eWRjaXYzMXF6cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xsE65jaPsUKUo/giphy.gif";
+  
+        Embed.Image gif = new Embed.Image();
+        gif.setUrl(gifUrl);
+  
+        Embed embed = new EmbedBuilder()
+                .withTitle("GIF Example")
+                .withImage(gif)
+                .build();
+  
+        WebhookMessage msg = new WebhookMessageBuilder()
+                .withEmbeds(Collections.singletonList(embed))
+                .build();
+
+      client.sendMessage(webhookUrl, msg);
+    }
+}
+```
+
+### Video Example
+Videos can be included via URL in the message content (Discord will embed it automatically) or as a file attachment.
+
+```java
+import com.n1netails.n1netails.discord.model.*;
+import java.util.Collections;
+
+public class VideoExample {
+    public void sendVideo(DiscordWebhookClient client, String webhookUrl, byte[] videoData) {
+        // Video via URL in content
+        String videoUrl = "https://n1netails.nyc3.cdn.digitaloceanspaces.com/video_2026-02-11_18-16-07.mp4";
+        videoData = downloadToBytes(videoUrl);
+  
+        // Video as file attachment
+        WebhookFile file = new WebhookFile("video_2026-02-11_18-16-07.mp4", videoData);
+  
+        WebhookMessage msg = new WebhookMessageBuilder()
+                .withContent("New video uploaded!")
+                .withFiles(Collections.singletonList(file))
+                .build();
+  
+        client.sendMessage(webhookUrl, msg);
+    }
+}
+
+public static byte[] downloadToBytes(String fileUrl) throws IOException {
+  URL url = new URL(fileUrl);
+
+  try (InputStream in = url.openStream();
+       ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+
+    byte[] chunk = new byte[8192];
+    int bytesRead;
+
+    while ((bytesRead = in.read(chunk)) != -1) {
+      buffer.write(chunk, 0, bytesRead);
+    }
+
+    return buffer.toByteArray();
+  }
+}
+```
+
+## Available Models
 Send customized webhooks by utilizing the n1netails Pojo's 
 - `WebhookMessage`
   - `content`
@@ -117,6 +240,8 @@ Send customized webhooks by utilizing the n1netails Pojo's
   - `avatar_url`
   - `tts`
   - `embeds`
+  - `components`
+  - `files`
 - `Embed`
   - `title`
   - `description`
@@ -138,72 +263,21 @@ Send customized webhooks by utilizing the n1netails Pojo's
   - `thumbnail`
     - `url`
   - `timestamp`
-
-Example:
-
-```java
-import com.n1netails.n1netails.discord.DiscordColor;
-import com.n1netails.n1netails.discord.api.DiscordWebhookClient;
-import com.n1netails.n1netails.discord.model.Embed;
-import com.n1netails.n1netails.discord.model.WebhookMessage;
-import com.n1netails.n1netails.discord.model.WebhookMessageBuilder;
-import com.n1netails.n1netails.discord.model.EmbedBuilder;
-import java.util.Collections;
-import java.time.Instant;
-
-public class ExampleService {
-  private final DiscordWebhookClient webhookClient;
-
-  public ExampleService() {
-    this.webhookClient = new DiscordWebhookClientImpl(new WebhookService());
-  }
-
-  public void webhookExample(String content) {
-    Embed.Author author = new Embed.Author();
-    author.setName("N1ne Tails");
-    author.setUrl("https://n1netails.com/");
-    author.setIcon_url("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
-
-    Embed.EmbedField field = new Embed.EmbedField();
-    field.setName("Environment");
-    field.setValue("Development");
-    field.setInline(true);
-
-    Embed.Footer footer = new Embed.Footer();
-    footer.setText("N1ne Tails @ 2024");
-    footer.setIcon_url("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
-
-    Embed.Image image = new Embed.Image();
-    image.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
-
-    Embed.Thumbnail thumbnail = new Embed.Thumbnail();
-    thumbnail.setUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
-
-    Embed embed = new EmbedBuilder()
-        .withTitle("Build Notification")
-        .withDescription("The build has succeeded ✅")
-        .withUrl("https://n1netails.com/")
-        .withColor(DiscordColor.BLUE.getValue())
-        .withAuthor(author)
-        .withFields(Collections.singletonList(field))
-        .withFooter(footer)
-        .withImage(image)
-        .withThumbnail(thumbnail)
-        .withTimestamp(Instant.now().toString())
-        .build();
-
-    WebhookMessage msg = new WebhookMessageBuilder()
-        .withUsername("CI Bot")
-        .withContent("Deployment update")
-        .withEmbeds(Collections.singletonList(embed))
-        .build();
-
-    // replace with your discord webhook url
-    String webhookUrl = "https://discord.com/api/webhooks/xxx/yyy";
-    webhookClient.sendMessage(webhookUrl, msg);
-  }
-}
-```
+- `Component`
+  - `type`
+  - `style`
+  - `label`
+  - `emoji`
+    - `id`
+    - `name`
+    - `animated`
+  - `custom_id`
+  - `url`
+  - `disabled`
+  - `components`
+- `WebhookFile`
+  - `filename`
+  - `data`
 
 #### Example customized message output
 <div align="center">
@@ -230,6 +304,41 @@ Maven deploy to the maven central repository
 ```bash
 mvn deploy -P release
 ```
+
+### GPG
+Generate keys
+```bash
+gpg --full-generate-key
+```
+
+List keys
+```bash
+gpg --list-secret-keys --keyid-format LONG
+```
+
+Export
+### Export private key
+```bash
+gpg --export-secret-keys --armor YOUR_KEY_ID > private.asc
+```
+
+### Export public key
+
+```bash
+gpg --export --armor YOUR_KEY_ID > public.asc
+```
+
+Import
+```bash
+gpg --import private.asc
+gpg --import public.asc
+```
+
+List packets (good for validating keys were exported correctly)
+```bash
+gpg --list-packets public.asc
+```
+
 
 ## Support
 

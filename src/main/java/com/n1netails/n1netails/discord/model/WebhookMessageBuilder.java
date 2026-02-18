@@ -8,6 +8,8 @@ public class WebhookMessageBuilder {
     private String avatarUrl;
     private boolean tts;
     private List<Embed> embeds;
+    private List<Component> components;
+    private List<WebhookFile> files;
 
     public WebhookMessageBuilder withContent(String content) {
         this.content = content;
@@ -34,6 +36,16 @@ public class WebhookMessageBuilder {
         return this;
     }
 
+    public WebhookMessageBuilder withComponents(List<Component> components) {
+        this.components = components;
+        return this;
+    }
+
+    public WebhookMessageBuilder withFiles(List<WebhookFile> files) {
+        this.files = files;
+        return this;
+    }
+
     public WebhookMessage build() {
         WebhookMessage message = new WebhookMessage();
         message.setContent(content);
@@ -41,6 +53,8 @@ public class WebhookMessageBuilder {
         message.setAvatar_url(avatarUrl);
         message.setTts(tts);
         message.setEmbeds(embeds);
+        message.setComponents(components);
+        message.setFiles(files);
         return message;
     }
 }
